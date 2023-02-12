@@ -4,8 +4,7 @@
     state: "{{ user_systemd_services.state }}"
     enabled: "{{ user_systemd_services.enabled }}"
     scope: user
-  loop:
-    - { name: podman.socket, state: started, enabled: yes }
+  loop: "{{ config.systemd.user }}"
   loop_control:
     loop_var: user_systemd_services
 
@@ -16,7 +15,6 @@
     enabled: "{{ systemd_services.enabled }}"
     scope: system
   become: yes
-  loop:
-    - { name: sshd.service, state: started, enabled: yes }
+  loop: "{{ config.systemd.system }}"
   loop_control:
     loop_var: systemd_services
