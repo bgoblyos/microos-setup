@@ -8,3 +8,8 @@
     - { name: exa, state: present }
     - { name: bat, state: present }
     - { name: fish, state: present }
+
+  systemd:
+    - name: downloads-delete.service
+      enabled: no
+      state: no
