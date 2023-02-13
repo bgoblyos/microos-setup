@@ -1,0 +1,6 @@
+[Unit]
+Description=Delete old files in Downloads
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/find $HOME/Downloads -mtime +30 -delete

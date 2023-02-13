@@ -7,7 +7,7 @@
 
 - name: Copy user services and timers {{ task_identifier }}
   ansible.builtin.template:
-    src: "templates/systemd/ {{ systemd_service.name }}"
+    src: "templates/systemd/{{ systemd_service.name }}"
     dest: "{{ ansible_user_dir }}/.config/systemd/user/{{systemd_service.name}}"
   loop: "{{ host.systemd }}"
   loop_control:
