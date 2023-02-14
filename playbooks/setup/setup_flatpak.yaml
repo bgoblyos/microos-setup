@@ -4,6 +4,7 @@
     state: "{{ flatpak.state }}"
     method: "{{ flatpak.method }}"
     remote: "{{ flatpak.remote }}"
+  become: true
 
 - name: Make local bin wrapper {{ flatpak.name }} {{ flatpak.state }} in {{ lookup('env','HOME') }}/.local/bin/
   ansible.builtin.copy:
