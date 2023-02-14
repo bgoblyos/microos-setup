@@ -13,3 +13,6 @@
     - name: downloads-delete.service
       enabled: no
       state: stopped
+    - name: downloads-delete.timer
+      enabled: yes
+      state: started
