@@ -1,30 +1,26 @@
-- name: kinoite-test
+- name: microos-test
   tasks: 
     - playbooks/host/tasks_host_default.yaml
     - playbooks/host/tasks_host_transactional_update.yaml
     - playbooks/host/tasks_host_systemd.yaml
 
   packages:
-    - { name: exa, state: present }
-    - { name: bat, state: present }
-    - { name: fish, state: present }
+    - { name: exa, action: install }
+    - { name: bat, action: install }
+    - { name: fish, action: install }
 
   systemd:
-    - name: downloads-delete.service
-      enabled: no
-      state: stopped
-    - name: downloads-delete.timer
-      enabled: yes
-      state: started
-    - name: flatpak-update.service
-      enabled: no
-      state: stopped
-    - name: flatpak-update.timer
-      enabled: yes
-      state: stopped
-    - name: rpm-ostree-update.service
-      enabled: no
-      state: stopped
-    - name: rpm-ostree-update.timer
-      enabled: yes
-      state: stopped
+    user:
+      - name: downloads-delete.service
+        enabled: no
+        state: stopped
+      - name: downloads-delete.timer
+        enabled: yes
+        state: started
+      - name: flatpak-update.service
+        enabled: no
+        state: stopped
+      - name: flatpak-update.timer
+        enabled: yes
+        state: stopped
+    system: {}

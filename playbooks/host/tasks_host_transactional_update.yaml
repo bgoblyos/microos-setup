@@ -1,0 +1,24 @@
+- name: Apply transactional-update.conf
+  ansible.builtin.template:
+    src: "templates/transactional-update.conf"
+    dest: "/etc/transactional-update.conf"
+  become: true
+
+- name: Install recommended packages
+  ansible.builtin.shell:
+    cmd: "/sbin/transactional-update --continue --drop-if-no-change --quiet --non-interactive run zypper install-new-recommends --non-interactive"
+  become: true
+
+- name: Update system snapshot
+  ansible.builtin.shell:
+    cmd: "/sbin/transactional-update --continue --drop-if-no-change --quiet --non-interactive dup"
+  become: true
+
+- name: Manage packages {{ task_identifier }}
+  ansible.builtin.shell:
+    cmd: "/sbin/transactional-update --continue --drop-if-no-change --quiet --non-interactive pkg {{ system_pkg.action }} {{ system_pkg.name }}"
+  loop: "{{ host.packages }}"
+  loop_control:
+    loop_var: system_pkg
+    label: {'name': '{{ system_pkg.name }}', 'action': '{{ system_pkg.action }}'}
+  become: true

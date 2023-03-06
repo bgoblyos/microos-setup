@@ -3,7 +3,7 @@ Description=Update Flatpak packages
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/flatpak update --assumeyes --noninteractive
+ExecStart=/usr/bin/flatpak update --user --assumeyes --noninteractive
 Nice=5
 
 [Install]

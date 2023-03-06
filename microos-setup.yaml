@@ -1,7 +1,9 @@
-- hosts: localhost
-  connection: local
+- name: MicroOS setup playbook
+  #hosts: localhost
+  #connection: local
+  hosts: testvms
   vars:
-     project: ansiblue
+     project: microos-setup
      ansible_remote_tmp: /tmp
      ansiblue_dir: "{{ playbook_dir }}"
      config:
@@ -20,11 +22,10 @@
       community.general.flatpak_remote:
         name: "{{ item.name }}"
         state: "{{ item.state }}"
-        method: "{{ item.method }}"
+        method: user
         flatpakrepo_url: "{{ item.flatpakrepo_url }}"
       loop: "{{ config.flatpak.remotes }}"
       tags: [flatpak]
-      become: true
 
     - name: Setup flatpaks
       include_tasks: playbooks/setup/setup_flatpak.yaml
