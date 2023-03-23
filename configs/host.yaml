@@ -8,6 +8,8 @@
     - { name: exa, action: install }
     - { name: bat, action: install }
     - { name: fish, action: install }
+    - { name: man, action: install }
+    - { name: man-pages, action: install }
 
   systemd:
     user:
